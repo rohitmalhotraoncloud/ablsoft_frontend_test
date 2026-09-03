@@ -1,0 +1,17 @@
+services:
+  api:
+    build: ${BACKEND_CONTEXT:-../../IdeaProjects/ablsoft_upwork}
+    environment:
+      DB_URL: jdbc:h2:file:/app/data/inventory
+    volumes:
+      - inventory-data:/app/data
+
+  frontend:
+    build: .
+    depends_on:
+      - api
+    ports:
+      - "4200:80"
+
+volumes:
+  inventory-data:
